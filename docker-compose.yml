@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    container_name: synthetic-frontier
+    ports:
+      - "5002:5002"
+    environment:
+      SECRET_KEY: change-me-in-production
+      DATABASE_PATH: /data/site.db
+      UPLOAD_ROOT: /data/uploads
+    volumes:
+      - ./data:/data
+    restart: unless-stopped

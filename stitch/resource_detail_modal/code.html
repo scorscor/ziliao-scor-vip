@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-primary-container": "#004d57",
+                  "primary-dim": "#00d4ec",
+                  "background": "#060e1d",
+                  "surface-container-lowest": "#000000",
+                  "on-error": "#490006",
+                  "surface-dim": "#060e1d",
+                  "surface": "#060e1d",
+                  "on-primary-fixed-variant": "#005762",
+                  "primary-fixed-dim": "#00d4ec",
+                  "surface-container-high": "#152034",
+                  "surface-container": "#0f192c",
+                  "secondary-container": "#343d96",
+                  "tertiary-dim": "#bfd8e5",
+                  "outline": "#6d7589",
+                  "on-tertiary-fixed": "#2b424d",
+                  "on-surface": "#dde5fb",
+                  "on-tertiary": "#465d68",
+                  "on-error-container": "#ffa8a3",
+                  "error-dim": "#d7383b",
+                  "on-secondary-container": "#c9cdff",
+                  "on-secondary-fixed": "#1f2882",
+                  "on-surface-variant": "#a3abc0",
+                  "tertiary-container": "#cde6f4",
+                  "on-background": "#dde5fb",
+                  "inverse-surface": "#f9f9ff",
+                  "tertiary-fixed-dim": "#bfd8e5",
+                  "on-primary": "#005762",
+                  "on-secondary-fixed-variant": "#3e47a0",
+                  "inverse-primary": "#006976",
+                  "tertiary-fixed": "#cde6f4",
+                  "surface-container-low": "#0a1324",
+                  "primary-fixed": "#00e3fd",
+                  "secondary-dim": "#8d96f4",
+                  "on-secondary": "#0b1574",
+                  "on-tertiary-fixed-variant": "#475f6a",
+                  "tertiary": "#e0f4ff",
+                  "primary-container": "#00e3fd",
+                  "surface-container-highest": "#1a263c",
+                  "secondary": "#929bfa",
+                  "secondary-fixed-dim": "#babfff",
+                  "error-container": "#9f0519",
+                  "surface-tint": "#81ecff",
+                  "error": "#ff716c",
+                  "surface-bright": "#1f2c44",
+                  "on-tertiary-container": "#3e5560",
+                  "secondary-fixed": "#cbceff",
+                  "inverse-on-surface": "#4d5567",
+                  "outline-variant": "#40485a",
+                  "primary": "#81ecff",
+                  "on-primary-fixed": "#003840",
+                  "surface-variant": "#1a263c"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "fontFamily": {
+                  "headline": ["Space Grotesk"],
+                  "body": ["Inter"],
+                  "label": ["Space Grotesk"]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen overflow-hidden">
+<!-- Main Content Mockup (Blurred Background) -->
+<div class="fixed inset-0 z-0 p-8 grid grid-cols-12 gap-6 opacity-40 grayscale pointer-events-none">
+<!-- Top Nav Bar (Shell Mockup) -->
+<header class="col-span-12 h-16 bg-[#060e1d]/60 backdrop-blur-xl border-b border-[#40485a]/20 flex justify-between items-center px-8 fixed top-0 w-full z-50">
+<div class="text-xl font-bold tracking-tighter text-[#81ecff] font-['Space_Grotesk']">SYNTHETIC_FRONTIER</div>
+<div class="flex gap-8 items-center text-[#929bfa] font-['Space_Grotesk'] text-sm tracking-wider">
+<span class="text-[#81ecff] border-b-2 border-[#81ecff] pb-1">RESOURCES</span>
+<span>INFRASTRUCTURE</span>
+<span>TERMINAL</span>
+<span class="material-symbols-outlined text-[#81ecff]">person</span>
+</div>
+</header>
+<!-- Background Grid Simulation -->
+<div class="col-span-12 mt-20 grid grid-cols-4 gap-6">
+<div class="h-64 bg-surface-container border border-outline-variant/10 rounded-sm"></div>
+<div class="h-64 bg-surface-container border border-outline-variant/10 rounded-sm"></div>
+<div class="h-64 bg-surface-container border border-outline-variant/10 rounded-sm"></div>
+<div class="h-64 bg-surface-container border border-outline-variant/10 rounded-sm"></div>
+<div class="h-64 bg-surface-container border border-outline-variant/10 rounded-sm"></div>
+<div class="h-64 bg-surface-container border border-outline-variant/10 rounded-sm"></div>
+</div>
+</div>
+<!-- Resource Detail Modal Overlay -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-surface/80 backdrop-blur-md p-4 md:p-8">
+<!-- Modal Container -->
+<div class="relative w-full max-w-6xl bg-surface-container-highest/60 backdrop-blur-2xl border border-outline-variant/20 rounded-sm shadow-[0_24px_80px_rgba(6,14,29,0.5)] overflow-hidden flex flex-col md:flex-row max-h-[921px]">
+<!-- Close Button -->
+<button class="absolute top-6 right-6 z-[110] text-secondary hover:text-primary transition-colors duration-300">
+<span class="material-symbols-outlined text-3xl">close</span>
+</button>
+<!-- Left Column: Visual Preview -->
+<div class="w-full md:w-5/12 bg-surface-container-low flex flex-col items-center justify-center p-8 border-r border-outline-variant/10">
+<div class="relative group w-full aspect-[3/4] max-w-sm">
+<!-- Bracket Corners -->
+<div class="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-primary"></div>
+<div class="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-primary"></div>
+<img class="w-full h-full object-cover rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 opacity-80" data-alt="Technical document display showing glowing blue circuit patterns and neural network diagrams on a sleek glass interface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB-cv2rA6_AWsbptxzPnPVpF7km3aFeMDxPEDUK4p_kd1MYmBUF22HpTNsLNrHJwpoGk1s2tWPgSw9vvnBjhSI3TwQqVIurOnMjLMRn7e9mWo11ltj7rVq8vwPpXXZ31RBwdWgppL_9684tGhlSdQL30Qa50iDmVDUrytPRMaThVZOR_Ny0eLN3rrDsTCgmPXiMRlvaJvmsxLreEkgc2HhC8d3ENDiAImmu5VSSUabn4itwKyb_GoVwifX4TzbcVCHsB0uRSA4j2rz"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-surface/40 backdrop-blur-sm">
+<span class="material-symbols-outlined text-primary text-6xl">fullscreen</span>
+</div>
+</div>
+<div class="mt-8 flex flex-col gap-2 w-full max-w-sm">
+<div class="flex justify-between items-center px-2">
+<span class="font-label text-[10px] text-secondary uppercase tracking-[0.2em]">Asset_ID</span>
+<span class="font-label text-[10px] text-primary tracking-widest">#AI-IMPL-992-X</span>
+</div>
+<div class="h-[1px] w-full bg-gradient-to-r from-transparent via-outline-variant/30 to-transparent"></div>
+<div class="flex justify-between items-center px-2">
+<span class="font-label text-[10px] text-secondary uppercase tracking-[0.2em]">Checksum</span>
+<span class="font-label text-[10px] text-primary tracking-widest">7F4A...B2C1</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Technical Content -->
+<div class="w-full md:w-7/12 flex flex-col h-full overflow-y-auto custom-scrollbar">
+<div class="p-8 md:p-12 space-y-8">
+<!-- Header Area -->
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<span class="inline-block w-3 h-3 bg-primary animate-pulse"></span>
+<span class="font-label text-xs text-primary uppercase tracking-[0.3em]">System.Core.Resource</span>
+</div>
+<h1 class="font-headline text-4xl md:text-5xl font-bold text-on-surface tracking-tight leading-none">
+                Advanced AI Implementation Guide
+            </h1>
+<div class="flex flex-wrap gap-3 pt-2">
+<div class="bg-surface-container-high px-3 py-1 flex items-center gap-2 border-l-2 border-primary">
+<span class="font-label text-[10px] text-on-surface tracking-widest uppercase">Deep Learning</span>
+</div>
+<div class="bg-surface-container-high px-3 py-1 flex items-center gap-2 border-l-2 border-primary">
+<span class="font-label text-[10px] text-on-surface tracking-widest uppercase">Neural Ops</span>
+</div>
+<div class="bg-surface-container-high px-3 py-1 flex items-center gap-2 border-l-2 border-secondary">
+<span class="font-label text-[10px] text-secondary tracking-widest uppercase">Level 4 Clearance</span>
+</div>
+</div>
+</div>
+<!-- Description Section -->
+<div class="space-y-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg">terminal</span>
+<span class="font-label text-xs text-secondary uppercase tracking-widest">Documentation_Overview</span>
+</div>
+<div class="space-y-4 text-on-surface-variant leading-relaxed text-base font-light">
+<p>
+                    This comprehensive architectural framework outlines the core methodologies for deploying large-scale heuristic models within synthetic environments. Designed for engineers operating at the frontier of digital synthesis, this guide covers the critical synchronization protocols required for low-latency inference cycles.
+                </p>
+<p>
+                    The documentation delves deep into <span class="text-primary font-medium">multi-threaded vector processing</span>, tensor quantization strategies, and autonomous error-correction loops. It serves as the primary technical anchor for all neural infrastructure projects within the Laboratory.
+                </p>
+<ul class="space-y-3 pt-2">
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-1">schema</span>
+<span>Full schematic breakdown of Layer 3 neural architectures.</span>
+</li>
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-1">monitoring</span>
+<span>Performance benchmarks for Real-Time data ingestion.</span>
+</li>
+<li class="flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary text-sm mt-1">lock</span>
+<span>End-to-end encryption protocols for weight transmission.</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Technical Specs Grid -->
+<div class="grid grid-cols-2 gap-4 py-4">
+<div class="p-4 bg-surface-container-low border border-outline-variant/10">
+<div class="font-label text-[10px] text-secondary uppercase tracking-widest mb-1">Filesize</div>
+<div class="font-headline text-xl text-on-surface">142.8 MB</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant/10">
+<div class="font-label text-[10px] text-secondary uppercase tracking-widest mb-1">Format</div>
+<div class="font-headline text-xl text-on-surface">RAW_JSON</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="pt-4 flex flex-col gap-4">
+<button class="w-full py-5 bg-gradient-to-r from-primary to-primary-dim text-on-primary font-headline font-bold text-lg tracking-widest uppercase flex items-center justify-center gap-3 rounded-sm transform active:scale-[0.98] transition-all hover:shadow-[0_0_20px_rgba(129,236,255,0.4)]">
+<span class="material-symbols-outlined font-normal">download_for_offline</span>
+                Download Resource
+            </button>
+<div class="flex justify-center">
+<button class="text-secondary hover:text-primary transition-colors text-[10px] font-label tracking-[0.3em] uppercase">
+                    Initialize Remote Access Terminal
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Command Center Footer (Shell Mockup) -->
+<footer class="fixed bottom-0 w-full z-50 h-16 bg-[#1a2332]/80 backdrop-blur-md border-t border-[#40485a]/30 flex justify-between items-center px-12 pointer-events-none opacity-50">
+<div class="flex gap-1 text-[#81ecff]">
+<div class="w-2 h-2 border-t border-l border-[#81ecff]"></div>
+<div class="text-[10px] font-['Space_Grotesk'] tracking-[0.2em] uppercase">Status: Secure</div>
+</div>
+<div class="flex gap-8 text-[#929bfa] font-['Space_Grotesk'] text-[10px] uppercase tracking-[0.2em]">
+<span>Documentation</span>
+<span>Infrastructure</span>
+<span>Terminal</span>
+</div>
+<div class="flex gap-1 text-[#81ecff]">
+<div class="text-[10px] font-['Space_Grotesk'] tracking-[0.2em] uppercase">Grid_Active</div>
+<div class="w-2 h-2 border-b border-r border-[#81ecff]"></div>
+</div>
+</footer>
+<style>
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0a1324;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #40485a;
+      border-radius: 0px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #81ecff;
+    }
+  </style>
+</body></html>

@@ -1,0 +1,62 @@
+{% extends "admin/base.html" %}
+
+{% block title %}资源管理{% endblock %}
+
+{% block content %}
+  <main class="admin-main">
+    <section class="admin-card">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">RESOURCE DIRECTORY</div>
+          <h2>资源列表</h2>
+        </div>
+        <a class="primary-link" href="{{ url_for('admin.create_resource') }}">新增资源</a>
+      </div>
+
+      <form class="toolbar" method="get">
+        <input type="search" name="q" value="{{ keyword }}" placeholder="按标题搜索资源" />
+        <button type="submit">搜索</button>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>排序</th>
+              <th>标题</th>
+              <th>分类</th>
+              <th>编号</th>
+              <th>更新时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for resource in resources %}
+              <tr>
+                <td>{{ resource.display_order }}</td>
+                <td>
+                  <strong>{{ resource.title }}</strong>
+                  <span>{{ resource.short_description[:72] }}{% if resource.short_description|length > 72 %}...{% endif %}</span>
+                </td>
+                <td>{{ resource.category }}</td>
+                <td>{{ resource.resource_code }}</td>
+                <td>{{ resource.updated_at.strftime("%Y-%m-%d") }}</td>
+                <td class="actions">
+                  <a href="{{ url_for('admin.edit_resource', resource_id=resource.id) }}">编辑</a>
+                  <a href="{{ url_for('public.index', detail=resource.slug) }}" target="_blank" rel="noreferrer">预览</a>
+                  <form method="post" action="{{ url_for('admin.delete_resource', resource_id=resource.id) }}" onsubmit="return confirm('确认删除这条资源吗？');">
+                    <button type="submit" class="danger-link">删除</button>
+                  </form>
+                </td>
+              </tr>
+            {% else %}
+              <tr>
+                <td colspan="6" class="empty-row">当前还没有资源，可以先新建一条。</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+{% endblock %}

@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    container_name: ziliao-scor-vip
+    ports:
+      - "127.0.0.1:5002:5002"
+    env_file:
+      - .env.production
+    volumes:
+      - ./data:/data
+    restart: unless-stopped

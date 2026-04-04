@@ -1,0 +1,69 @@
+{% extends "admin/base.html" %}
+
+{% block title %}二维码配置{% endblock %}
+
+{% block content %}
+  <main class="admin-main">
+    <form class="admin-card form-grid" method="post" enctype="multipart/form-data">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">FOOTER QR CONFIG</div>
+          <h2>二维码配置</h2>
+        </div>
+        <a class="secondary-link" href="{{ url_for('admin.dashboard') }}">返回列表</a>
+      </div>
+
+      <section class="form-section">
+        <h3>左侧二维码</h3>
+        <div class="field-grid two-col">
+          <label>
+            <span>二维码图片</span>
+            <input type="file" name="left_qr_file" accept="image/*" />
+          </label>
+          <label>
+            <span>主标题</span>
+            <input type="text" name="left_title" value="{{ config.left_title or '' }}" maxlength="120" />
+          </label>
+          <label class="full-width">
+            <span>副标题</span>
+            <input type="text" name="left_subtitle" value="{{ config.left_subtitle or '' }}" maxlength="255" />
+          </label>
+        </div>
+        {% if config.left_qr_path %}
+          <div class="preview-box">
+            <span>当前左侧二维码</span>
+            <img src="{{ url_for('public.media', path=config.left_qr_path) }}" alt="左侧二维码" />
+          </div>
+        {% endif %}
+      </section>
+
+      <section class="form-section">
+        <h3>右侧二维码</h3>
+        <div class="field-grid two-col">
+          <label>
+            <span>二维码图片</span>
+            <input type="file" name="right_qr_file" accept="image/*" />
+          </label>
+          <label>
+            <span>主标题</span>
+            <input type="text" name="right_title" value="{{ config.right_title or '' }}" maxlength="120" />
+          </label>
+          <label class="full-width">
+            <span>副标题</span>
+            <input type="text" name="right_subtitle" value="{{ config.right_subtitle or '' }}" maxlength="255" />
+          </label>
+        </div>
+        {% if config.right_qr_path %}
+          <div class="preview-box">
+            <span>当前右侧二维码</span>
+            <img src="{{ url_for('public.media', path=config.right_qr_path) }}" alt="右侧二维码" />
+          </div>
+        {% endif %}
+      </section>
+
+      <div class="form-actions">
+        <button type="submit">保存二维码配置</button>
+      </div>
+    </form>
+  </main>
+{% endblock %}

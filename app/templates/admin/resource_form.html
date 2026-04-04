@@ -1,0 +1,80 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{% if form_mode == "create" %}新增资源{% else %}编辑资源{% endif %}{% endblock %}
+
+{% block content %}
+  <main class="admin-main">
+    <form class="admin-card form-grid" method="post" enctype="multipart/form-data">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">RESOURCE EDITOR</div>
+          <h2>{% if form_mode == "create" %}新增资源{% else %}编辑资源{% endif %}</h2>
+        </div>
+        <a class="secondary-link" href="{{ url_for('admin.dashboard') }}">返回列表</a>
+      </div>
+
+      <section class="form-section">
+        <h3>基础信息</h3>
+        <p class="field-note">
+          如果你上传的是文件夹，标题、简介和正文都可以留空。
+          系统会自动把文件夹打包成 zip，并根据 <code>README.md</code> 自动生成内容。
+        </p>
+        <div class="field-grid two-col">
+          <label>
+            <span>标题</span>
+            <input type="text" name="title" value="{{ resource.title or '' }}" />
+          </label>
+          <label>
+            <span>更新时间</span>
+            <input type="date" name="updated_at" value="{{ resource.updated_at.isoformat() if resource.updated_at else '' }}" />
+          </label>
+        </div>
+      </section>
+
+      <details class="form-section collapsible-section">
+        <summary>
+          <span>展示内容</span>
+          <span>可选手动编辑</span>
+        </summary>
+        <div class="field-grid">
+          <label>
+            <span>简短描述</span>
+            <textarea name="short_description" rows="3">{{ resource.short_description or '' }}</textarea>
+          </label>
+          <label>
+            <span>正文概览</span>
+            <textarea name="overview" rows="8">{{ resource.overview or '' }}</textarea>
+          </label>
+        </div>
+      </details>
+
+      <section class="form-section">
+        <h3>上传与资源</h3>
+        <div class="field-grid two-col">
+          <label>
+            <span>上传文件夹</span>
+            <input type="file" name="folder_files" webkitdirectory directory multiple />
+          </label>
+          <label>
+            <span>云盘链接</span>
+            <input type="url" name="cloud_link" value="{{ resource.cloud_link or resource.download_url or '' }}" />
+          </label>
+          <label>
+            <span>云盘取件码</span>
+            <input type="text" name="cloud_code" value="{{ resource.cloud_code or '' }}" maxlength="80" />
+          </label>
+        </div>
+        <p class="field-note">
+          如果上传的文件夹里包含 <code>README.md</code> 或 <code>readme.md</code>，
+          系统会自动读取内容并填充资源信息，同时把整个文件夹保存为 zip 包。
+          如果文件夹里包含图片，系统会自动挑选一张作为封面。
+          如果同时填写云盘链接和取件码，前台详情页也会一起显示。
+        </p>
+      </section>
+
+      <div class="form-actions">
+        <button type="submit">保存资源</button>
+      </div>
+    </form>
+  </main>
+{% endblock %}

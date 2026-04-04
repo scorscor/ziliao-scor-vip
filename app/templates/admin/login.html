@@ -1,0 +1,30 @@
+{% extends "admin/base.html" %}
+
+{% block title %}后台登录{% endblock %}
+
+{% block content %}
+  <main class="login-layout">
+    <section class="login-panel">
+      <div class="eyebrow">CONTROL ACCESS</div>
+      <h2>后台登录</h2>
+      <p>登录后可以管理资源、上传文件，并更新前台展示内容。</p>
+
+      <form method="post" class="login-form">
+        <label>
+          <span>账号</span>
+          <input type="text" name="username" value="cjwcjw" required />
+        </label>
+        <label>
+          <span>密码</span>
+          <input type="password" name="password" value="19911017" required />
+        </label>
+        <button type="submit">进入后台</button>
+      </form>
+
+      <div class="login-hint">
+        默认账号：<strong>cjwcjw</strong><br />
+        默认密码：<strong>19911017</strong>
+      </div>
+    </section>
+  </main>
+{% endblock %}

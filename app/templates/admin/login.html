@@ -12,19 +12,14 @@
       <form method="post" class="login-form">
         <label>
           <span>账号</span>
-          <input type="text" name="username" value="cjwcjw" required />
+          <input type="text" name="username" autocomplete="username" required />
         </label>
         <label>
           <span>密码</span>
-          <input type="password" name="password" value="19911017" required />
+          <input type="password" name="password" autocomplete="current-password" required />
         </label>
         <button type="submit">进入后台</button>
       </form>
-
-      <div class="login-hint">
-        默认账号：<strong>cjwcjw</strong><br />
-        默认密码：<strong>19911017</strong>
-      </div>
     </section>
   </main>
 {% endblock %}

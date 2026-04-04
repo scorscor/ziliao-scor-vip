@@ -6,6 +6,8 @@ from datetime import date
 
 from flask import current_app
 from sqlalchemy import inspect, text
+from sqlalchemy.dialects.sqlite import insert as sqlite_insert
+from werkzeug.security import generate_password_hash
 
 from .extensions import db
 from .models import AdminUser, Resource, SiteConfig
@@ -172,19 +174,29 @@ def ensure_seed_data() -> None:
     db.create_all()
     ensure_resource_schema()
 
-    admin = AdminUser.query.filter_by(username=DEFAULT_ADMIN_USERNAME).first()
-    if not admin:
-        admin = AdminUser(username=DEFAULT_ADMIN_USERNAME)
-        admin.set_password(DEFAULT_ADMIN_PASSWORD)
-        db.session.add(admin)
+    db.session.execute(
+        sqlite_insert(AdminUser)
+        .values(
+            username=DEFAULT_ADMIN_USERNAME,
+            password_hash=generate_password_hash(DEFAULT_ADMIN_PASSWORD),
+        )
+        .on_conflict_do_nothing(index_elements=["username"])
+    )
 
-    if Resource.query.count() == 0:
-        for payload in DEFAULT_RESOURCES:
-            db.session.add(Resource(**payload))
+    db.session.execute(
+        sqlite_insert(SiteConfig)
+        .values(id=1, **DEFAULT_SITE_CONFIG)
+        .on_conflict_do_nothing(index_elements=["id"])
+    )
 
-    site_config = db.session.get(SiteConfig, 1)
-    if not site_config:
-        db.session.add(SiteConfig(id=1, **DEFAULT_SITE_CONFIG))
+    for payload in DEFAULT_RESOURCES:
+        db.session.execute(
+            sqlite_insert(Resource)
+            .values(**payload)
+            .on_conflict_do_nothing(index_elements=["slug"])
+        )
+
+    db.session.commit()
 
     backfill_resource_archives()
     backfill_cloud_links()

@@ -18,6 +18,7 @@ def create_app() -> Flask:
     database_path = os.environ.get("DATABASE_PATH", os.path.join(app.instance_path, "site.db"))
     upload_root = os.environ.get("UPLOAD_ROOT", os.path.join(app.instance_path, "uploads"))
     database_dir = os.path.dirname(database_path)
+    database_exists = Path(database_path).exists()
     sqlalchemy_db_path = Path(database_path).resolve().as_posix()
 
     app.config.update(
@@ -31,7 +32,7 @@ def create_app() -> Flask:
     app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
 
     os.makedirs(app.instance_path, exist_ok=True)
-    if database_dir:
+    if not database_exists and database_dir:
         os.makedirs(database_dir, exist_ok=True)
     os.makedirs(upload_root, exist_ok=True)
     os.makedirs(os.path.join(upload_root, "images"), exist_ok=True)
@@ -48,7 +49,8 @@ def create_app() -> Flask:
             ensure_seed_data()
         print("Database initialized.")
 
-    with app.app_context():
-        ensure_seed_data()
+    if not database_exists:
+        with app.app_context():
+            ensure_seed_data()
 
     return app

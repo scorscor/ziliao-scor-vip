@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   bindQrPreview();
+  bindCloudPrompt();
 
   const modal = document.querySelector("[data-modal-root]");
   if (!modal) {
@@ -18,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+      if (closeCloudPrompt()) {
+        return;
+      }
       if (closeQrPreview()) {
         return;
       }
@@ -93,6 +97,80 @@ function closeQrPreview() {
   if (!document.querySelector("[data-modal-root]")) {
     document.body.classList.remove("overflow-hidden");
   }
+  return true;
+}
+
+function bindCloudPrompt() {
+  const previewRoot = document.querySelector("[data-cloud-preview-root]");
+  const triggers = document.querySelectorAll("[data-cloud-trigger]");
+  if (!previewRoot || !triggers.length) {
+    return;
+  }
+
+  const codeValue = previewRoot.querySelector("[data-cloud-preview-code]");
+  const confirmLink = previewRoot.querySelector("[data-cloud-confirm]");
+  const closeButtons = previewRoot.querySelectorAll("[data-cloud-close]");
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      const url = trigger.getAttribute("href");
+      if (!url) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (codeValue) {
+        codeValue.textContent =
+          trigger.getAttribute("data-cloud-code") || trigger.getAttribute("data-cloud-no-code") || "";
+      }
+      if (confirmLink) {
+        confirmLink.setAttribute("href", url);
+      }
+
+      previewRoot.classList.remove("hidden");
+      previewRoot.classList.add("flex");
+      previewRoot.setAttribute("aria-hidden", "false");
+    });
+  });
+
+  closeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      closeCloudPrompt();
+    });
+  });
+
+  confirmLink?.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const url = confirmLink.getAttribute("href");
+    if (!url || url === "#") {
+      return;
+    }
+
+    closeCloudPrompt();
+
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (!newWindow) {
+      window.location.href = url;
+    }
+  });
+}
+
+function closeCloudPrompt() {
+  const previewRoot = document.querySelector("[data-cloud-preview-root]");
+  if (!previewRoot || previewRoot.classList.contains("hidden")) {
+    return false;
+  }
+
+  const confirmLink = previewRoot.querySelector("[data-cloud-confirm]");
+  if (confirmLink) {
+    confirmLink.setAttribute("href", "#");
+  }
+
+  previewRoot.classList.add("hidden");
+  previewRoot.classList.remove("flex");
+  previewRoot.setAttribute("aria-hidden", "true");
   return true;
 }
 

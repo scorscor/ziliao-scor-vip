@@ -107,9 +107,14 @@ function bindCloudPrompt() {
     return;
   }
 
+  const panel = previewRoot.querySelector("[data-cloud-panel]");
   const codeValue = previewRoot.querySelector("[data-cloud-preview-code]");
   const confirmLink = previewRoot.querySelector("[data-cloud-confirm]");
   const closeButtons = previewRoot.querySelectorAll("[data-cloud-close]");
+
+  panel?.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
 
   triggers.forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
@@ -125,7 +130,7 @@ function bindCloudPrompt() {
           trigger.getAttribute("data-cloud-code") || trigger.getAttribute("data-cloud-no-code") || "";
       }
       if (confirmLink) {
-        confirmLink.setAttribute("href", url);
+        confirmLink.dataset.cloudUrl = url;
       }
 
       previewRoot.classList.remove("hidden");
@@ -142,15 +147,16 @@ function bindCloudPrompt() {
 
   confirmLink?.addEventListener("click", (event) => {
     event.preventDefault();
+    event.stopPropagation();
 
-    const url = confirmLink.getAttribute("href");
-    if (!url || url === "#") {
+    const url = confirmLink.dataset.cloudUrl;
+    if (!url) {
       return;
     }
 
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
     closeCloudPrompt();
 
-    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
     if (!newWindow) {
       window.location.href = url;
     }
@@ -165,7 +171,7 @@ function closeCloudPrompt() {
 
   const confirmLink = previewRoot.querySelector("[data-cloud-confirm]");
   if (confirmLink) {
-    confirmLink.setAttribute("href", "#");
+    delete confirmLink.dataset.cloudUrl;
   }
 
   previewRoot.classList.add("hidden");

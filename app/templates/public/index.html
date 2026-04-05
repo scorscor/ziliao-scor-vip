@@ -297,7 +297,7 @@
     </div>
 
     {% if detail_resource %}
-      {% set detail_image = url_for('public.media', path=detail_resource.image_path) if detail_resource.image_path else detail_resource.image_url %}
+      {% set detail_image = url_for('public.media', path=detail_resource.image_path) if detail_resource.image_path else (detail_resource.image_url or url_for('static', filename='default.png')) %}
       {% set icons = ['schema', 'monitoring', 'lock'] %}
       <div id="resource-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-surface/80 p-4 backdrop-blur-md md:p-8" data-modal-root>
         <div class="relative flex h-[min(921px,calc(100vh-2rem))] w-full max-w-6xl min-h-0 flex-col overflow-hidden rounded-sm border border-outline-variant/20 bg-surface-container-highest/60 shadow-[0_24px_80px_rgba(6,14,29,0.5)] backdrop-blur-2xl md:h-[min(921px,calc(100vh-4rem))] md:flex-row" data-modal-panel>
@@ -337,18 +337,17 @@
                 <div class="pt-4">
                   <div class="flex flex-col gap-3">
                     {% if detail_resource.has_cloud_link %}
-                      <a
-                        href="{{ detail_resource.resolved_cloud_link }}"
-                        target="_blank"
-                        rel="noreferrer"
+                      <button
+                        type="button"
                         data-cloud-trigger
+                        data-cloud-url="{{ detail_resource.resolved_cloud_link }}"
                         data-cloud-code="{{ detail_resource.cloud_code or '' }}"
                         data-cloud-no-code="{{ t('detail_cloud_no_code') }}"
                         class="flex w-full items-center justify-center gap-2 rounded-sm border border-secondary/40 px-4 py-3 text-xs tracking-[0.18em] text-secondary transition-colors hover:bg-secondary/10 font-label"
                       >
                         <span class="material-symbols-outlined text-base">cloud_download</span>
                         {{ t('detail_open_cloud') }}
-                      </a>
+                      </button>
                     {% endif %}
                     {% if detail_resource.has_archive %}
                       <a href="{{ url_for('public.download', slug=detail_resource.slug) }}" class="flex w-full items-center justify-center gap-2 rounded-sm border border-primary/40 px-4 py-3 text-xs tracking-[0.18em] text-primary transition-colors hover:bg-primary/10 font-label">
@@ -451,18 +450,17 @@
 
               <div class="flex flex-col gap-4 pt-4">
                 {% if detail_resource.has_cloud_link %}
-                  <a
-                    href="{{ detail_resource.resolved_cloud_link }}"
-                    target="_blank"
-                    rel="noreferrer"
+                  <button
+                    type="button"
                     data-cloud-trigger
+                    data-cloud-url="{{ detail_resource.resolved_cloud_link }}"
                     data-cloud-code="{{ detail_resource.cloud_code or '' }}"
                     data-cloud-no-code="{{ t('detail_cloud_no_code') }}"
                     class="flex w-full items-center justify-center gap-3 rounded-sm border border-secondary/40 py-5 text-lg font-bold uppercase tracking-widest text-secondary transition-all hover:bg-secondary/10 active:scale-[0.98] font-headline"
                   >
                     <span class="material-symbols-outlined font-normal">cloud_download</span>
                     {{ t('detail_open_cloud') }}
-                  </a>
+                  </button>
                 {% endif %}
                 {% if detail_resource.has_archive %}
                   <a href="{{ url_for('public.download', slug=detail_resource.slug) }}" class="flex w-full items-center justify-center gap-3 rounded-sm bg-gradient-to-r from-primary to-primary-dim py-5 text-lg font-bold uppercase tracking-widest text-on-primary transition-all hover:shadow-[0_0_20px_rgba(129,236,255,0.4)] active:scale-[0.98] font-headline">

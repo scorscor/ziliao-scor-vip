@@ -118,12 +118,13 @@ function bindCloudPrompt() {
 
   triggers.forEach((trigger) => {
     trigger.addEventListener("click", (event) => {
-      const url = trigger.getAttribute("href");
+      const url = trigger.getAttribute("data-cloud-url");
       if (!url) {
         return;
       }
 
       event.preventDefault();
+      event.stopPropagation();
 
       if (codeValue) {
         codeValue.textContent =

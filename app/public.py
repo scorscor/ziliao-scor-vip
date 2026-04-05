@@ -263,6 +263,11 @@ def set_language(lang: str):
     return redirect(url_for("public.index"))
 
 
+@bp.route("/favicon.ico")
+def favicon():
+    return current_app.send_static_file("favicon.ico")
+
+
 @bp.route("/")
 def index():
     q = request.args.get("q", "").strip()

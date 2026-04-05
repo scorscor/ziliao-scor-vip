@@ -4,7 +4,7 @@ Flask + SQLite personal site with a stitched sci-fi frontend, admin login, resou
 
 ## Admin Account
 
-- Username: `cjwcjw`
+- Username: `admin`
 - Password: `19911017`
 
 ## Local Run

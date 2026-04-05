@@ -13,7 +13,7 @@ from .extensions import db
 from .models import AdminUser, Resource, SiteConfig
 
 
-DEFAULT_ADMIN_USERNAME = "cjwcjw"
+DEFAULT_ADMIN_USERNAME = "admin"
 DEFAULT_ADMIN_PASSWORD = "19911017"
 
 DEFAULT_IMAGE = (
